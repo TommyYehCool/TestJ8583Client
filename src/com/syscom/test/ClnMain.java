@@ -17,6 +17,8 @@ public class ClnMain {
 	private int mServerPort = 1234;
 	private int mTimeout = 10000;
 	
+	private ClnCommunicationHandler communicationHandler;
+	
 	private void start() {
 		loadLog4jConfig();
 		
@@ -62,13 +64,13 @@ public class ClnMain {
 			
 			log.info("Connect to server ip:<{}>, port:<{}> succeed", mServerIp, mServerPort);
 			
-			ClnCommunicationHandler communicationHandler 
-				= new ClnCommunicationHandler(socket);
+			communicationHandler = new ClnCommunicationHandler(socket);
 			
 			communicationHandler.start();
 		} 
 		catch (IOException e) {
 			log.warn("Connect failed, ip:<{}>, port:<{}>, err-msg: {}", mServerIp, mServerPort, e.toString(), e);
+			System.exit(1);
 		}
 	}
 
