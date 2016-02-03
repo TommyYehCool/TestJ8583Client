@@ -56,7 +56,9 @@ public class ClnMain {
 		Socket socket = new Socket();
 		try {
 			socket.setTcpNoDelay(true);
-			socket.setSoTimeout(mTimeout);
+			
+			// 如果設定這個 InputStream read 會發生 timeout
+//			socket.setSoTimeout(mTimeout);
 			
 			InetSocketAddress isa = new InetSocketAddress(mServerIp, mServerPort);
 			

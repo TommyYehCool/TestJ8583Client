@@ -28,6 +28,8 @@ public class ClnCommunicationHandler extends Thread {
 	public ClnCommunicationHandler(Socket socket) throws IOException {
 		setName(this.getClass().getSimpleName());
 		
+		mConnected = true;
+		
 		mInputStream = socket.getInputStream();
 		mOutputStream = socket.getOutputStream();
 		
