@@ -22,7 +22,7 @@ public class ClnMain {
 	private void start() {
 		loadLog4jConfig();
 		
-		showPid();
+		showInitLog();
 		
 		initMessageHandler();
 		
@@ -37,8 +37,8 @@ public class ClnMain {
 		log.info("Load log4j config succeed, path: <{}>", log4jConfig);
 	}
 
-	private void showPid() {
-		log.info("Process ID: <{}>", ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);
+	private void showInitLog() {
+		log.info("------- Try to init client process with process ID: <{}> -------", ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);
 	}
 
 	private void initMessageHandler() {
