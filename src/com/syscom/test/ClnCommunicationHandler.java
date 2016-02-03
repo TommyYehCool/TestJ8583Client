@@ -62,6 +62,8 @@ public class ClnCommunicationHandler extends Thread {
 				
 				log.info("Received server message done, msg: <{}>", new String(bSvrMsg));
 				
+				// TODO 處理 server 過來的 ISO8583 訊息
+//				mMessageHandler.processISO8583(bSvrMsg);
 			}
 			disconnectFromServer();
 		}
