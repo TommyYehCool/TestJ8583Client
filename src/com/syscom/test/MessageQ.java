@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class RespForSvrQ {
+public class MessageQ {
 private BlockingQueue<byte[]> queue;
 	
 	// TODO 改為設定檔
 	private int maximumTakenFromQ; 
 	
-	public RespForSvrQ() {
+	public MessageQ() {
 		queue = new LinkedBlockingQueue<byte[]>();
 	}
 	

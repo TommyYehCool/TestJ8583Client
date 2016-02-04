@@ -10,17 +10,17 @@ import com.solab.iso8583.IsoMessage;
 import com.solab.iso8583.MessageFactory;
 import com.solab.iso8583.parse.ConfigParser;
 
-public class ClnMessageHandler {
+public class ISO8583MsgHandler {
 	
 	private final static Logger log = LoggerFactory.getLogger("com.syscom.test");
 	
 	private final String mJ8583CfgPath = "./config/j8583-config.xml";
 	
-	private static ClnMessageHandler instance = new ClnMessageHandler();
+	private static ISO8583MsgHandler instance = new ISO8583MsgHandler();
 	
 	private MessageFactory<IsoMessage> mf = new MessageFactory<IsoMessage>();
 	
-	public static ClnMessageHandler getInstance() {
+	public static ISO8583MsgHandler getInstance() {
 		return instance;
 	}
 	
@@ -37,5 +37,16 @@ public class ClnMessageHandler {
 			succeed = false;
 		}
 		return succeed;
+	}
+	
+	public byte[] createMsg(String strType) {
+		int type = Integer.parseInt(strType, 16);
+		
+		IsoMessage isoMsg = mf.newMessage(type);
+		if (isoMsg.getIsoHeader() == null) {
+			return null;
+		}
+		
+		return isoMsg.writeData();
 	}
 }
