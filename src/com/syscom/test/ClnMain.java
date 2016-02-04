@@ -26,7 +26,7 @@ public class ClnMain {
 		
 		initMessageHandler();
 		
-		startClient();
+		connectToServer();
 	}
 
 	private void loadLog4jConfig() {
@@ -52,26 +52,28 @@ public class ClnMain {
 		}
 	}
 
-	private void startClient() {
+	private void connectToServer() {
 		Socket socket = new Socket();
 		try {
 			socket.setTcpNoDelay(true);
 			
-			// 如果設定這個 InputStream read 會發生 timeout
+			// NOTE: 如果設定這個 InputStream read 會發生 timeout
 //			socket.setSoTimeout(mTimeout);
 			
 			InetSocketAddress isa = new InetSocketAddress(mServerIp, mServerPort);
 			
 			socket.connect(isa, mTimeout);
 			
-			log.info("Connect to server ip:<{}>, port:<{}> succeed", mServerIp, mServerPort);
+			log.info("Connect to server ip: <{}>, port: <{}> succeed", mServerIp, mServerPort);
 			
 			communicationHandler = new ClnCommunicationHandler(socket);
 			
 			communicationHandler.start();
+			
+			log.info("------- Prepare to communicate with server -------");
 		} 
 		catch (IOException e) {
-			log.warn("Connect failed, ip:<{}>, port:<{}>, err-msg: {}", mServerIp, mServerPort, e.toString(), e);
+			log.warn("Connect failed, ip: <{}>, port: <{}>, err-msg: {}", mServerIp, mServerPort, e.toString(), e);
 			System.exit(1);
 		}
 	}
