@@ -122,11 +122,11 @@ public class ClnCommunicationHandler extends Thread {
 		public void run() {
 			try {
 				while (mConnected) {
-					List<byte[]> respMsg = mMsgQ.getResps();
+					List<byte[]> msgs = mMsgQ.getResps();
 					
-					int msgCounts = respMsg.size();
+					int msgCounts = msgs.size();
 					if (msgCounts == 1) {
-						String msg = new String(respMsg.get(0));
+						String msg = new String(msgs.get(0));
 						if (msg.equals(DISCONNECTED)) {
 							log.warn("Detected disconnect from server, terminate MsgHandler thread...");
 							break;
@@ -134,15 +134,15 @@ public class ClnCommunicationHandler extends Thread {
 					}
 					
 					for (int i = 0; i < msgCounts; i++) {
-						byte[] bRespMsgs = respMsg.get(i);
+						byte[] bMsg = msgs.get(i);
 						
-						byte[] msgLen = ConvertUtil.convertIntTo2Bytes(bRespMsgs.length);
+						byte[] msgLen = ConvertUtil.convertIntTo2Bytes(bMsg.length);
 						
 						mOutputStream.write(msgLen);
-						mOutputStream.write(bRespMsgs);
+						mOutputStream.write(bMsg);
 						mOutputStream.flush();
 						
-						log.info("Send message to server done, msg: <{}>", new String(bRespMsgs));
+						log.info("Send message to server done, msg: <{}>", new String(bMsg));
 					}
 				}
 				log.warn("Received disconnect from server signal, terminate MsgHandler thread");
