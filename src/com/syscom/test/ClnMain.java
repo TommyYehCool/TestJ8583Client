@@ -101,7 +101,7 @@ public class ClnMain {
 							log.warn("Please input a message type which <header> and <template> both defined in j8583-config.xml");
 						}
 						else {
-							log.info("Create message type: {} from template suceed, content:{}", userInput, new String(bMsg));
+							log.info("Create message type: {} from template suceed, content: <{}>", userInput, new String(bMsg));
 							
 							mCommunicationHandler.sendMsgToServer(bMsg);
 						}
