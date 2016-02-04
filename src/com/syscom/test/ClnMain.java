@@ -108,7 +108,7 @@ public class ClnMain {
 						break;
 				}
 			}
-			log.info(">>>>>> Client terminare <<<<<");
+			log.info(">>>>>> Client terminate <<<<<");
 			System.exit(0);
 		}
 	}
